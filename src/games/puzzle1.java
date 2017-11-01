@@ -86,7 +86,7 @@ public class puzzle1 extends JFrame implements ActionListener {
 
         setVisible(true);
         setTitle("Number Puzzle");
-        setSize(1370, 730);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(0, 0);

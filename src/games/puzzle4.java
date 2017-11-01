@@ -87,7 +87,7 @@ public class puzzle4 extends JFrame implements ActionListener {
 
         setVisible(true);
         setTitle("Number Puzzle");
-        setSize(1370, 730);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(0, 0);
@@ -219,8 +219,8 @@ public class puzzle4 extends JFrame implements ActionListener {
                     .equals("3") && b4.getLabel().equals("4") && b5.getLabel().equals("5")
                     && b6.getLabel().equals("6") && b7.getLabel().equals("7") && b8.getLabel()
                     .equals("8") && b9.getLabel().equals(" ")) {
-                JOptionPane.showMessageDialog(puzzle4.this, "You have completed the Puzzle 4.");
-                new puzzle5();
+                JOptionPane.showMessageDialog(puzzle4.this, "You have finished all the Puzzles in this game.");
+                new Games();
                 this.dispose();
             }
         }

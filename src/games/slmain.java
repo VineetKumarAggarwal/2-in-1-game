@@ -2,76 +2,296 @@ package games;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 import javax.swing.*;
 
 public class slmain extends JFrame implements ActionListener {
 
-    ImageIcon img1, img2;
+    ImageIcon img1;
+    Image img2, img3, img4, img5, img6, img7;
+    Toolkit t = (Toolkit.getDefaultToolkit());
+    Random r = new Random();
     JLabel lb1, lb2, lb3, lb4, lb5, lb6, lb7;
-    JButton bt1, bt2;
+    JButton bt1, bt2, bt3, bt4;
+    boolean start = false, start1 = false;
+    int x = 0, p1 = 0, p2 = 0, count = 0, xpos, ypos;
 
     slmain() {
+
         setLayout(null);
 
         img1 = new ImageIcon("C:\\Users\\vinet\\Documents\\NetBeansProjects\\2-in-1\\src\\games\\images\\board.jpg");
-        lb1 = new JLabel("", img1, JLabel.CENTER);
-        lb1.setBounds(0, 0, 1100, 700);
+        lb1 = new JLabel("", img1,JLabel.LEFT);
+        lb1.setBounds(100, 0, 970, 710);
         add(lb1);
 
         bt1 = new JButton("DICE 1");
         bt1.setFont(new Font("Arial Black", Font.BOLD, 20));
-        bt1.setBounds(1040, 50, 200, 40);
+        bt1.setBounds(900, 50, 180, 40);
         add(bt1);
 
         bt2 = new JButton("DICE 2");
         bt2.setFont(new Font("Arial Black", Font.BOLD, 20));
-        bt2.setBounds(1040, 120, 200, 40);
+        bt2.setBounds(1110, 50, 180, 40);
         add(bt2);
+
+        bt3 = new JButton("New Game");
+        bt3.setFont(new Font("Arial Black", Font.BOLD, 20));
+        bt3.setBounds(1020, 560, 180, 40);
+        add(bt3);
+
+        bt4 = new JButton("Quit");
+        bt4.setFont(new Font("Arial Black", Font.BOLD, 20));
+        bt4.setBounds(1020, 620, 180, 40);
+        add(bt4);
 
         lb3 = new JLabel("SCORE :");
         lb3.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb3.setBounds(980, 480, 200, 30);
+        lb3.setBounds(980, 380, 200, 30);
         add(lb3);
 
         lb4 = new JLabel("PLAYER 1");
         lb4.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb4.setBounds(980, 540, 200, 30);
+        lb4.setBounds(980, 440, 200, 30);
         add(lb4);
 
         lb5 = new JLabel("PLAYER 2");
         lb5.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb5.setBounds(980, 580, 200, 30);
+        lb5.setBounds(980, 480, 200, 30);
         add(lb5);
 
-        lb6 = new JLabel("00");
-        lb6.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb6.setBounds(1200, 540, 200, 30);
-        add(lb6);
-
-        lb7 = new JLabel("00");
-        lb7.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb7.setBounds(1200, 580, 200, 30);
-        add(lb7);
-        
         bt1.addActionListener(this);
         bt2.addActionListener(this);
+        bt3.addActionListener(this);
+        bt4.addActionListener(this);
 
-        setBackground(Color.GREEN);
+        img2 = t.createImage(getClass().getResource("1.jpg"));
+        img3 = t.createImage(getClass().getResource("2.jpg"));
+        img4 = t.createImage(getClass().getResource("3.jpg"));
+        img5 = t.createImage(getClass().getResource("4.jpg"));
+        img6 = t.createImage(getClass().getResource("5.jpg"));
+        img7 = t.createImage(getClass().getResource("6.jpg"));
+
+        getContentPane().setBackground(new Color(100, 200, 100));
 
         setVisible(true);
         setTitle("Snake & Ladder");
-        setSize(1370, 730);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocation(0, 0);
     }
 
+    public int snl(int x) {
+        if (x == 4) {
+            x = 14;
+        }
+        if (x == 9) {
+            x = 31;
+        }
+        if (x == 20) {
+            x = 38;
+        }
+        if (x == 28) {
+            x = 84;
+        }
+        if (x == 36) {
+            x = 44;
+        }
+        if (x == 42) {
+            x = 63;
+        }
+        if (x == 51) {
+            x = 67;
+        }
+
+        if (x == 62) {
+            x = 81;
+        }
+        if (x == 71) {
+            x = 90;
+        }
+        if (x == 25) {
+            x = 3;
+        }
+        if (x == 56) {
+            x = 48;
+        }
+        if (x == 59) {
+            x = 1;
+        }
+        if (x == 69) {
+            x = 32;
+        }
+        if (x == 83) {
+            x = 57;
+        }
+        if (x == 91) {
+            x = 73;
+        }
+        if (x == 94) {
+            x = 26;
+        }
+        if (x == 99) {
+            x = 80;
+        }
+
+        return x;
+    }
+
+    public void paint(Graphics g) {
+        super.paint(g);
+        String pl1 = Integer.toString(p1);
+        String pl2 = Integer.toString(p2);
+
+        g.setFont(new Font("Arial Black", Font.BOLD, 25));
+
+        g.drawString(pl1, 1200, 490);
+        g.drawString(pl2, 1200, 530);
+
+        switch (x) {
+            case 1:
+                g.drawImage(img2, 1000, 170, 200, 180, this);
+                break;
+
+            case 2:
+                g.drawImage(img3, 1000, 170, 200, 180, this);
+                break;
+
+            case 3:
+                g.drawImage(img4, 1000, 170, 200, 180, this);
+                break;
+
+            case 4:
+                g.drawImage(img5, 1000, 170, 200, 180, this);
+                break;
+
+            case 5:
+                g.drawImage(img6, 1000, 170, 200, 180, this);
+                break;
+
+            case 6:
+                g.drawImage(img7, 1000, 170, 200, 180, this);
+                break;
+        }
+
+        if (p1 == 0) {
+            g.setColor(Color.RED);
+            g.fillOval(40, 650, 40, 40);
+        } else {
+            calc_position(p1);
+            g.setColor(Color.RED);
+            g.fillOval(xpos, ypos, 40, 40);
+        }
+        if (p2 == 0) {
+            g.setColor(Color.BLUE);
+            g.fillOval(40, 600, 40, 40);
+        } else {
+            calc_position(p2);
+            g.setColor(Color.BLUE);
+            g.fillOval(xpos, ypos, 40, 40);
+        }
+    }
+
+    public void calc_position(int sc) {
+        int a, b;
+        a = sc / 10;
+        int e = a % 2;
+        b = sc % 10;
+
+        if (b == 0) {
+            a--;
+            a = 10 - a;
+            ypos = 68 * a;
+        } else {
+            a = 10 - a;
+            ypos = (68 * a) - 5;
+        }
+
+        if (e == 0) {
+            if (b == 0) {
+
+                xpos = 96;
+            } else {
+                xpos = (96 * b);
+            }
+        } else {
+            if (b == 0) {
+                xpos = 1050 - 96;
+            } else {
+                xpos = 1050 - (96 * b);
+            }
+        }
+        return;
+    }
+
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == bt1) {
-            img2 = new ImageIcon("C:\\Users\\vinet\\Documents\\NetBeansProjects\\2-in-1\\src\\games\\images\\1.jpg");
-            lb2 = new JLabel("", img2, JLabel.CENTER);
-            lb2.setBounds(1040, 230, 200, 190);
-            add(lb2);
+            x = r.nextInt(6) + 1;
+            if (x == 6) {
+                count++;
+            }
+            if (x == 6 || x == 1) {
+                start = true;
+            }
+            if (start && p1 + x < 101) {
+                p1 = p1 + x;
+            }
+            if (count == 3) {
+                p1 = p1 - 18;
+            }
+            if (x != 6 || count == 3) {
+                bt1.setEnabled(false);
+                bt2.setEnabled(true);
+                count = 0;
+            }
+            p1 = snl(p1);
+            if (p1 == p2) {
+                p2 = 0;
+            }
+            if (p1 == 100) {
+                bt1.setEnabled(false);
+                bt2.setEnabled(false);
+            }
+            repaint();
+        }
+        if (ae.getSource() == bt2) {
+            x = r.nextInt(6) + 1;
+            if (x == 6) {
+                count++;
+            }
+            if (x == 6 || x == 1) {
+                start1 = true;
+            }
+            if (start1 && p2 + x < 101) {
+                p2 = p2 + x;
+            }
+            if (count == 3) {
+                p2 = p2 - 18;
+            }
+            p2 = snl(p2);
+            if (x != 6 || count == 3) {
+                bt1.setEnabled(true);
+                bt2.setEnabled(false);
+                count = 0;
+            }
+            if (p1 == p2) {
+                p1 = 0;
+            }
+            if (p2 == 100) {
+                bt1.setEnabled(false);
+                bt2.setEnabled(false);
+            }
+            repaint();
+        }
+        if (ae.getSource() == bt3) {
+            JOptionPane.showMessageDialog(slmain.this, "You are going to play a new game.");
+            new slplayers();
+            this.dispose();
+        }
+        if (ae.getSource() == bt4) {
+            new Games();
+            this.dispose();
         }
     }
 
