@@ -2,6 +2,8 @@ package games;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class puzzlentery extends JFrame implements ActionListener{

@@ -7,8 +7,7 @@ import javax.swing.*;
 
 public class slmain extends JFrame implements ActionListener {
 
-    ImageIcon img1;
-    Image img2, img3, img4, img5, img6, img7;
+    Image img2, img3, img4, img5, img6, img7, img1;
     Toolkit t = (Toolkit.getDefaultToolkit());
     Random r = new Random();
     JLabel lb1, lb2, lb3, lb4, lb5, lb6, lb7;
@@ -20,44 +19,43 @@ public class slmain extends JFrame implements ActionListener {
 
         setLayout(null);
 
-        img1 = new ImageIcon("C:\\Users\\vinet\\Documents\\NetBeansProjects\\2-in-1\\src\\games\\images\\board.jpg");
-        lb1 = new JLabel("", img1,JLabel.LEFT);
-        lb1.setBounds(100, 0, 970, 710);
-        add(lb1);
-
-        bt1 = new JButton("DICE 1");
-        bt1.setFont(new Font("Arial Black", Font.BOLD, 20));
-        bt1.setBounds(900, 50, 180, 40);
+        bt1 = new JButton("PLAYER 1");
+        bt1.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        bt1.setBackground(Color.RED);
+        bt1.setForeground(Color.WHITE);
+        bt1.setBounds(1080, 40, 220, 40);
         add(bt1);
 
-        bt2 = new JButton("DICE 2");
-        bt2.setFont(new Font("Arial Black", Font.BOLD, 20));
-        bt2.setBounds(1110, 50, 180, 40);
+        bt2 = new JButton("PLAYER 2");
+        bt2.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        bt2.setBackground(Color.BLUE);
+        bt2.setForeground(Color.WHITE);
+        bt2.setBounds(1080, 100, 220, 40);
         add(bt2);
 
         bt3 = new JButton("New Game");
-        bt3.setFont(new Font("Arial Black", Font.BOLD, 20));
-        bt3.setBounds(1020, 560, 180, 40);
+        bt3.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        bt3.setBounds(1080, 560, 220, 40);
         add(bt3);
 
         bt4 = new JButton("Quit");
-        bt4.setFont(new Font("Arial Black", Font.BOLD, 20));
-        bt4.setBounds(1020, 620, 180, 40);
+        bt4.setFont(new Font("Arial Black", Font.PLAIN, 20));
+        bt4.setBounds(1080, 620, 220, 40);
         add(bt4);
 
         lb3 = new JLabel("SCORE :");
-        lb3.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb3.setBounds(980, 380, 200, 30);
+        lb3.setFont(new Font("Arial Black", Font.PLAIN, 18));
+        lb3.setBounds(1060, 440, 200, 30);
         add(lb3);
 
         lb4 = new JLabel("PLAYER 1");
-        lb4.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb4.setBounds(980, 440, 200, 30);
+        lb4.setFont(new Font("Arial Black", Font.PLAIN, 18));
+        lb4.setBounds(1060, 470, 200, 30);
         add(lb4);
 
         lb5 = new JLabel("PLAYER 2");
-        lb5.setFont(new Font("Arial Black", Font.BOLD, 25));
-        lb5.setBounds(980, 480, 200, 30);
+        lb5.setFont(new Font("Arial Black", Font.PLAIN, 18));
+        lb5.setBounds(1060, 510, 200, 30);
         add(lb5);
 
         bt1.addActionListener(this);
@@ -71,6 +69,7 @@ public class slmain extends JFrame implements ActionListener {
         img5 = t.createImage(getClass().getResource("4.jpg"));
         img6 = t.createImage(getClass().getResource("5.jpg"));
         img7 = t.createImage(getClass().getResource("6.jpg"));
+        img1 = t.createImage(getClass().getResource("board.jpg"));
 
         getContentPane().setBackground(new Color(100, 200, 100));
 
@@ -144,52 +143,66 @@ public class slmain extends JFrame implements ActionListener {
         String pl1 = Integer.toString(p1);
         String pl2 = Integer.toString(p2);
 
-        g.setFont(new Font("Arial Black", Font.BOLD, 25));
+        g.drawImage(img1, 50, 20, 970, 720, this);
 
-        g.drawString(pl1, 1200, 490);
-        g.drawString(pl2, 1200, 530);
+        g.setFont(new Font("Arial Black", Font.PLAIN, 20));
+
+        g.drawString(pl1, 1200, 520);
+        g.drawString(pl2, 1200, 560);
 
         switch (x) {
             case 1:
-                g.drawImage(img2, 1000, 170, 200, 180, this);
+                g.drawImage(img2, 1102, 240, 180, 160, this);
                 break;
 
             case 2:
-                g.drawImage(img3, 1000, 170, 200, 180, this);
+                g.drawImage(img3, 1102, 240, 180, 160, this);
                 break;
 
             case 3:
-                g.drawImage(img4, 1000, 170, 200, 180, this);
+                g.drawImage(img4, 1102, 240, 180, 160, this);
                 break;
 
             case 4:
-                g.drawImage(img5, 1000, 170, 200, 180, this);
+                g.drawImage(img5, 1102, 240, 180, 160, this);
                 break;
 
             case 5:
-                g.drawImage(img6, 1000, 170, 200, 180, this);
+                g.drawImage(img6, 1102, 240, 180, 160, this);
                 break;
 
             case 6:
-                g.drawImage(img7, 1000, 170, 200, 180, this);
+                g.drawImage(img7, 1102, 240, 180, 160, this);
                 break;
         }
 
         if (p1 == 0) {
             g.setColor(Color.RED);
-            g.fillOval(40, 650, 40, 40);
+            g.fillOval(10, 650, 35, 35);
         } else {
             calc_position(p1);
             g.setColor(Color.RED);
-            g.fillOval(xpos, ypos, 40, 40);
+            g.fillOval(xpos, ypos, 35, 35);
         }
         if (p2 == 0) {
             g.setColor(Color.BLUE);
-            g.fillOval(40, 600, 40, 40);
+            g.fillOval(10, 600, 35, 35);
         } else {
             calc_position(p2);
             g.setColor(Color.BLUE);
-            g.fillOval(xpos, ypos, 40, 40);
+            g.fillOval(xpos, ypos, 35, 35);
+        }
+        if(p1==100)
+        {
+            JOptionPane.showMessageDialog(slmain.this, "Player 1 won the game.");
+            new Games();
+            this.dispose();
+        }
+        if(p2==100)
+        {
+            JOptionPane.showMessageDialog(slmain.this, "Player 2 won the game.");
+            new Games();
+            this.dispose();
         }
     }
 
@@ -207,7 +220,6 @@ public class slmain extends JFrame implements ActionListener {
             a = 10 - a;
             ypos = (68 * a) - 5;
         }
-
         if (e == 0) {
             if (b == 0) {
 
@@ -242,7 +254,10 @@ public class slmain extends JFrame implements ActionListener {
             }
             if (x != 6 || count == 3) {
                 bt1.setEnabled(false);
+                bt1.setBackground(Color.BLACK);
                 bt2.setEnabled(true);
+                bt2.setBackground(Color.BLUE);
+                bt2.setForeground(Color.WHITE);
                 count = 0;
             }
             p1 = snl(p1);
@@ -251,7 +266,9 @@ public class slmain extends JFrame implements ActionListener {
             }
             if (p1 == 100) {
                 bt1.setEnabled(false);
+                bt1.setBackground(Color.BLACK);
                 bt2.setEnabled(false);
+                bt2.setBackground(Color.BLACK);
             }
             repaint();
         }
@@ -271,8 +288,11 @@ public class slmain extends JFrame implements ActionListener {
             }
             p2 = snl(p2);
             if (x != 6 || count == 3) {
+                bt1.setBackground(Color.RED);
+                bt1.setForeground(Color.WHITE);
                 bt1.setEnabled(true);
                 bt2.setEnabled(false);
+                bt2.setBackground(Color.BLACK);
                 count = 0;
             }
             if (p1 == p2) {
@@ -280,7 +300,9 @@ public class slmain extends JFrame implements ActionListener {
             }
             if (p2 == 100) {
                 bt1.setEnabled(false);
+                bt1.setBackground(Color.BLACK);
                 bt2.setEnabled(false);
+                bt2.setBackground(Color.BLACK);
             }
             repaint();
         }
@@ -290,6 +312,7 @@ public class slmain extends JFrame implements ActionListener {
             this.dispose();
         }
         if (ae.getSource() == bt4) {
+            JOptionPane.showMessageDialog(slmain.this,"You are quiting this game, back to the main menu.");
             new Games();
             this.dispose();
         }
