@@ -7,6 +7,8 @@ import javax.swing.*;
 
 public class slmain extends JFrame implements ActionListener {
 
+    static String text, text1;
+
     Image img2, img3, img4, img5, img6, img7, img1;
     Toolkit t = (Toolkit.getDefaultToolkit());
     Random r = new Random();
@@ -19,14 +21,16 @@ public class slmain extends JFrame implements ActionListener {
 
         setLayout(null);
 
-        bt1 = new JButton("PLAYER 1");
+        bt1 = new JButton();
+        bt1.setText("" + text);
         bt1.setFont(new Font("Arial Black", Font.PLAIN, 20));
         bt1.setBackground(Color.RED);
         bt1.setForeground(Color.WHITE);
         bt1.setBounds(1080, 40, 220, 40);
         add(bt1);
 
-        bt2 = new JButton("PLAYER 2");
+        bt2 = new JButton();
+        bt2.setText("" + text1);
         bt2.setFont(new Font("Arial Black", Font.PLAIN, 20));
         bt2.setBackground(Color.BLUE);
         bt2.setForeground(Color.WHITE);
@@ -48,12 +52,12 @@ public class slmain extends JFrame implements ActionListener {
         lb3.setBounds(1060, 440, 200, 30);
         add(lb3);
 
-        lb4 = new JLabel("PLAYER 1");
+        lb4 = new JLabel("" + text);
         lb4.setFont(new Font("Arial Black", Font.PLAIN, 18));
         lb4.setBounds(1060, 470, 200, 30);
         add(lb4);
 
-        lb5 = new JLabel("PLAYER 2");
+        lb5 = new JLabel("" + text1);
         lb5.setFont(new Font("Arial Black", Font.PLAIN, 18));
         lb5.setBounds(1060, 510, 200, 30);
         add(lb5);
@@ -192,15 +196,13 @@ public class slmain extends JFrame implements ActionListener {
             g.setColor(Color.BLUE);
             g.fillOval(xpos, ypos, 35, 35);
         }
-        if(p1==100)
-        {
-            JOptionPane.showMessageDialog(slmain.this, "Player 1 won the game.");
+        if (p1 == 100) {
+            JOptionPane.showMessageDialog(slmain.this, text + " won the game.");
             new Games();
             this.dispose();
         }
-        if(p2==100)
-        {
-            JOptionPane.showMessageDialog(slmain.this, "Player 2 won the game.");
+        if (p2 == 100) {
+            JOptionPane.showMessageDialog(slmain.this, text1 + " won the game.");
             new Games();
             this.dispose();
         }
@@ -312,13 +314,23 @@ public class slmain extends JFrame implements ActionListener {
             this.dispose();
         }
         if (ae.getSource() == bt4) {
-            JOptionPane.showMessageDialog(slmain.this,"You are quiting this game, back to the main menu.");
+            JOptionPane.showMessageDialog(slmain.this, "You are quiting this game, back to the main menu.");
             new Games();
             this.dispose();
         }
     }
 
-    public static void main(String[] args) {
-        new slmain();
+    public static void main(String args[]) {
+//        slplayers p1=new slplayers();
+//        p1.names();
+//        String x=null;
+//        String y=null;
+        text = args[0];
+        text1 = args[1];
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new slmain();
+            }
+        });
     }
 }

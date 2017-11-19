@@ -2,6 +2,8 @@ package games;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class puzzle1 extends JFrame implements ActionListener {
@@ -9,8 +11,9 @@ public class puzzle1 extends JFrame implements ActionListener {
     JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, bt1, bt2;
     static JLabel lb1, lb2, lb3;
     static int i;
+    timer1 t = new timer1();
 
-    puzzle1() {
+    puzzle1() throws InterruptedException {
         setLayout(null);
 
         lb1 = new JLabel("PUZZLE 1");
@@ -20,67 +23,67 @@ public class puzzle1 extends JFrame implements ActionListener {
 
         b1 = new JButton("1");
         b1.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b1.setBackground(new Color(205,133,63));
+        b1.setBackground(new Color(205, 133, 63));
         b1.setBounds(160, 220, 150, 130);
         add(b1);
 
         b2 = new JButton("2");
         b2.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b2.setBackground(new Color(205,133,63));
+        b2.setBackground(new Color(205, 133, 63));
         b2.setBounds(330, 220, 150, 130);
         add(b2);
 
         b3 = new JButton("3");
         b3.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b3.setBackground(new Color(205,133,63));
+        b3.setBackground(new Color(205, 133, 63));
         b3.setBounds(500, 220, 150, 130);
         add(b3);
 
         b4 = new JButton("4");
         b4.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b4.setBackground(new Color(205,133,63));
+        b4.setBackground(new Color(205, 133, 63));
         b4.setBounds(160, 370, 150, 130);
         add(b4);
 
         b5 = new JButton(" ");
         b5.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b5.setBackground(new Color(205,133,63));
+        b5.setBackground(new Color(205, 133, 63));
         b5.setBounds(330, 370, 150, 130);
         add(b5);
 
         b6 = new JButton("6");
         b6.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b6.setBackground(new Color(205,133,63));
+        b6.setBackground(new Color(205, 133, 63));
         b6.setBounds(500, 370, 150, 130);
         add(b6);
 
         b7 = new JButton("5");
         b7.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b7.setBackground(new Color(205,133,63));
+        b7.setBackground(new Color(205, 133, 63));
         b7.setBounds(160, 520, 150, 130);
         add(b7);
 
         b8 = new JButton("8");
         b8.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b8.setBackground(new Color(205,133,63));
+        b8.setBackground(new Color(205, 133, 63));
         b8.setBounds(330, 520, 150, 130);
         add(b8);
 
         b9 = new JButton("7");
         b9.setFont(new Font("Times New Roman", Font.BOLD, 60));
-        b9.setBackground(new Color(205,133,63));
+        b9.setBackground(new Color(205, 133, 63));
         b9.setBounds(500, 520, 150, 130);
         add(b9);
 
         bt1 = new JButton("REFRESH");
         bt1.setFont(new Font("Times New Roman", Font.BOLD, 30));
-        bt1.setBackground(new Color(205,133,63));
+        bt1.setBackground(new Color(205, 133, 63));
         bt1.setBounds(900, 390, 200, 50);
         add(bt1);
 
         bt2 = new JButton("QUIT");
         bt2.setFont(new Font("Times New Roman", Font.BOLD, 30));
-        bt2.setBackground(new Color(205,133,63));
+        bt2.setBackground(new Color(205, 133, 63));
         bt2.setBounds(900, 470, 200, 50);
         add(bt2);
 
@@ -94,10 +97,9 @@ public class puzzle1 extends JFrame implements ActionListener {
         lb3.setBounds(1060, 220, 220, 100);
         add(lb3);
 
-        timer t = new timer();
         t.start();
         getContentPane().setBackground(new Color(155, 195, 10));
-        
+
         b1.addActionListener(this);
         b2.addActionListener(this);
         b3.addActionListener(this);
@@ -111,7 +113,7 @@ public class puzzle1 extends JFrame implements ActionListener {
         bt2.addActionListener(this);
 
         setVisible(true);
-        setTitle("Number Puzzle");
+        setTitle("Puzzle 1 (EASY)");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,7 +121,6 @@ public class puzzle1 extends JFrame implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent ae) {
-
         if (ae.getSource() == b1) {
             String s = b1.getLabel();
             if (b2.getLabel().equals(" ")) {
@@ -245,33 +246,42 @@ public class puzzle1 extends JFrame implements ActionListener {
                     && b6.getLabel().equals("6") && b7.getLabel().equals("7") && b8.getLabel()
                     .equals("8") && b9.getLabel().equals(" ")) {
                 JOptionPane.showMessageDialog(puzzle1.this, "You have completed the Puzzle 1.");
-                new puzzle2();
                 this.dispose();
+                new puzzle2();
             }
         }
         if (ae.getSource() == bt1) {
             this.dispose();
-            new puzzle1();
+            try {
+                t.stop();
+                new puzzle1();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(puzzle1.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         if (ae.getSource() == bt2) {
             JOptionPane.showMessageDialog(puzzle1.this, "You will lost all the progress by quiting the game.");
-            new Games();
             this.dispose();
+            t.stop();
+            new Games();
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         new puzzle1();
     }
 }
 
-class timer extends Thread {
+class timer1 extends Thread {
 
     int min, sec;
 
     public void run() {
         try {
             for (puzzle1.i = 120; puzzle1.i >= 0; puzzle1.i--) {
+//                if (puzzle1.over == "true") {
+//                    break;
+//                }
                 min = puzzle1.i / 60;
                 sec = puzzle1.i % 60;
                 if (sec >= 0 && sec <= 9) {
@@ -279,10 +289,10 @@ class timer extends Thread {
                 } else {
                     puzzle1.lb3.setText("0" + min + ":" + sec);
                 }
-                long delay = 1000;
-                Thread.sleep(delay);
+                Thread.sleep(1000);
             }
             if (puzzle1.i < 0) {
+                new puzzlentery();
             }
         } catch (Exception e) {
         }

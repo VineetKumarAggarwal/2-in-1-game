@@ -64,12 +64,12 @@ public class Games extends JFrame implements ActionListener {
         lb3.setBounds(720, 500, 700, 100);
         add(lb3);
 
-        jmb.add(jm1);
+        //jmb.add(jm1);
         jmb.add(jm2);
         jmb.add(jm3);
-        jm1.add(m1);
+        //jm1.add(m1);
         jm1.addSeparator();
-        jm1.add(m2);
+        //jm1.add(m2);
         jm2.add(m3);
         jm2.addSeparator();
         jm2.add(m4);
@@ -83,6 +83,7 @@ public class Games extends JFrame implements ActionListener {
         m6.addActionListener(this);
         m3.addActionListener(this);
         m4.addActionListener(this);
+        m5.addActionListener(this);
         m1.addActionListener(this);
         m2.addActionListener(this);
 
@@ -117,6 +118,8 @@ public class Games extends JFrame implements ActionListener {
             new rulessl();
         } else if (ae.getSource() == m4) {
             new rulesnp();
+        } else if (ae.getSource() == m5) {
+            new about();
         }
     }
 

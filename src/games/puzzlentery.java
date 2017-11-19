@@ -2,8 +2,6 @@ package games;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 public class puzzlentery extends JFrame implements ActionListener{
@@ -48,7 +46,7 @@ public class puzzlentery extends JFrame implements ActionListener{
         
         getContentPane().setBackground(Color.LIGHT_GRAY);
         setVisible(true);
-        setTitle("Brain Game");
+        setTitle("Number Puzzle");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,8 +56,12 @@ public class puzzlentery extends JFrame implements ActionListener{
     {
         if(ae.getSource()==bt1)
         {
+            try{
             new puzzle1();
-            this.dispose();
+            this.dispose();}
+            catch(Exception e){
+                
+            }
         }
         else if(ae.getSource()==bt2)
         {

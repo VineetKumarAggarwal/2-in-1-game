@@ -6,16 +6,16 @@ import javax.swing.*;
 
 public class rulesnp extends JFrame implements ActionListener {
 
-    JLabel lb1, lb2;
+    JLabel lb2;
     JButton bt1;
 
     rulesnp() {
         setLayout(null);
 
-        lb1 = new JLabel("Rules :-");
-        lb1.setFont(new Font("Arial Black", Font.BOLD, 20));
-        lb1.setBounds(10, 10, 1000, 20);
-        add(lb1);
+        lb2 = new JLabel("Rules :-");
+        lb2.setFont(new Font("Arial Black", Font.BOLD, 20));
+        lb2.setBounds(10, 10, 1000, 20);
+        add(lb2);
 
         lb2 = new JLabel("1. Players can choose the modes in which mode they want to");
         lb2.setFont(new Font("Arial Black", Font.PLAIN, 20));

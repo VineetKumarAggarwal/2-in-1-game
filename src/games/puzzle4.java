@@ -9,6 +9,7 @@ public class puzzle4 extends JFrame implements ActionListener {
     JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, bt1, bt2;
     static JLabel lb1, lb2, lb3;
     static int i;
+    timer4 t = new timer4();
 
     puzzle4() {
 
@@ -95,7 +96,6 @@ public class puzzle4 extends JFrame implements ActionListener {
         lb3.setBounds(1060, 220, 220, 100);
         add(lb3);
 
-        timer t = new timer();
         t.start();
         getContentPane().setBackground(new Color(155, 195, 10));
 
@@ -112,7 +112,7 @@ public class puzzle4 extends JFrame implements ActionListener {
         bt2.addActionListener(this);
 
         setVisible(true);
-        setTitle("Number Puzzle");
+        setTitle("Puzzle 4 (EASY)");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -245,18 +245,20 @@ public class puzzle4 extends JFrame implements ActionListener {
                     .equals("3") && b4.getLabel().equals("4") && b5.getLabel().equals("5")
                     && b6.getLabel().equals("6") && b7.getLabel().equals("7") && b8.getLabel()
                     .equals("8") && b9.getLabel().equals(" ")) {
-                JOptionPane.showMessageDialog(puzzle4.this, "You have finished all the Puzzles in this game.");
+                JOptionPane.showMessageDialog(puzzle4.this, "You have won the game all the Puzzles of this game are finished.");
                 new Games();
                 this.dispose();
             }
         }
         if (ae.getSource() == bt1) {
             new puzzle4();
+            t.stop();
             this.dispose();
         }
         if (ae.getSource() == bt2) {
             JOptionPane.showMessageDialog(puzzle4.this, "You will lost all the progress by quiting the game.");
             new Games();
+            t.stop();
             this.dispose();
         }
     }
@@ -266,24 +268,27 @@ public class puzzle4 extends JFrame implements ActionListener {
     }
 }
 
-class timer extends Thread {
+class timer4 extends Thread {
 
     int min, sec;
 
     public void run() {
         try {
-            for (puzzle1.i = 120; puzzle1.i >= 0; puzzle1.i--) {
-                min = puzzle1.i / 60;
-                sec = puzzle1.i % 60;
+            for (puzzle4.i = 120; puzzle4.i >= 0; puzzle4.i--) {
+//                if (puzzle1.over == "true") {
+//                    break;
+//                }
+                min = puzzle4.i / 60;
+                sec = puzzle4.i % 60;
                 if (sec >= 0 && sec <= 9) {
-                    puzzle1.lb3.setText("0" + min + ":0" + sec);
+                    puzzle4.lb3.setText("0" + min + ":0" + sec);
                 } else {
-                    puzzle1.lb3.setText("0" + min + ":" + sec);
+                    puzzle4.lb3.setText("0" + min + ":" + sec);
                 }
-                long delay = 1000;
-                Thread.sleep(delay);
+                Thread.sleep(1000);
             }
-            if (puzzle1.i < 0) {
+            if (puzzle4.i < 0) {
+                new puzzlentery();
             }
         } catch (Exception e) {
         }
